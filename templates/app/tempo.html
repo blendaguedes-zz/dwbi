@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+     <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Código Origem</th>
+            <th>Ano</th>
+        </tr>
+        </thead>
+    <tbody>
+    {% for result in tempo %}
+        <tr>
+          <th> {{ result.codTempo }}</th>
+          <th> {{ result.codOriginalTempo  }}</th>
+          <th> {{ result.ano }}</th>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% if tempo.has_other_pages %}
+      <ul class="pagination pagination-sm flex-sm-wrap">
+        {% if tempo.has_previous %}
+          <li><a href="?page={{ tempo.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in tempo.paginator.page_range %}
+          {% if tempo.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if ietemposs.has_next %}
+          <li><a href="?page={{ tempo.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+{% endblock %}

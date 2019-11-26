@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Código</th>
+            <th>Código Origem</th>
+            <th>Nome do IES</th>
+            <th>Categoria Adminstrativa</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for result in IESs %}
+            <tr>
+                <th> {{ result.codIES }}</th>
+                <th> {{ result.codOriginalIES }}</th>
+                <th> {{ result.nomeIES }}</th>
+                <th> {% if result.categoriaAdmistrativa == 1 %}
+                    Pública Federal
+                {% else %}
+                    {% if result.categoriaAdmistrativa == 2 %}
+                        Pública Estadual
+                    {% else %}
+                        {% if result.categoriaAdmistrativa == 3 %}
+                            Privada sem fins lucrativos
+                        {% else %}
+                            {% if result.categoriaAdmistrativa == 4 %}
+                                Pública Municipal
+                            {% else %}
+                                {% if result.categoriaAdmistrativa == 5 %}
+                                    Especial
+                                {% else %}
+                                    Privada com fins lucrativos
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if IESs.has_other_pages %}
+        <ul class="pagination pagination-sm flex-sm-wrap">
+            {% if IESs.has_previous %}
+                <li><a href="?page={{ iess.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in IESs.paginator.page_range %}
+                {% if IESs.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if ieIESsss.has_next %}
+                <li><a href="?page={{ IESs.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

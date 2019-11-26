@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Local</th>
+            <th>Tempo</th>
+            <th>Curso</th>
+            <th>Deficiência</th>
+            <th>Bolsa Auxílio</th>
+            <th>Reserva Vagas</th>
+            <th>Questão 1</th>
+            <th>Questão 2.1</th>
+            <th>Questão 2.2</th>
+            <th>Questão 3</th>
+            <th>Questão 4</th>
+            <th>Questão 5</th>
+            <th>Questão 6</th>
+            <th>Questão 7</th>
+            <th>Questão 8</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for result in alunas %}
+            <tr>
+                <th> {{ result.codLocalIESPk.codLocalIES }}</th>
+                <th> {{ result.codTempoPk.codTempo }}</th>
+                <th> {{ result.codCursoPk.codCurso }}</th>
+                <th> {{ result.codDeficienciaPk.codDeficiencia }}</th>
+                <th> {{ result.codBolsaAuxilioPk.codBolsaAuxilio }}</th>
+                <th> {{ result.codReservaVagasPk.codReservaVagas }}</th>
+                <th> {{ result.indiceDesistenciaDeficiencia }}</th>
+                <th> {{ result.indiceIngressantesConcluintesRegiaoFederal }}</th>
+                <th> {{ result.indiceIngressantesConcluintesRegiaoEstadual }}</th>
+                <th> {{ result.indiceEscolaPublicaCursosTradicionais }}</th>
+                <th> {{ result.indiceDesistenciaReservaVagasRegiao }}</th>
+                <th> {{ result.indiceConcluintesCapitalInteriorNordeste }}</th>
+                <th> {{ result.indiceConcluintesBolsistaNordeste }}</th>
+                <th> {{ result.indiceBaixaRendaNoturnoRegiao }}</th>
+                <th> {{ result.indiceDesistenciaLicenciaturaIngresso }}</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if alunas.has_other_pages %}
+        <ul class="pagination pagination-sm flex-sm-wrap">
+            {% if alunas.has_previous %}
+                <li><a href="?page={{ alunas.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in alunas.paginator.page_range %}
+                {% if alunas.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if iealunasss.has_next %}
+                <li><a href="?page={{ alunas.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+
+{% endblock %}

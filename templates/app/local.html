@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+     <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Código Origem</th>
+            <th>Nome Região</th>
+            <th>Nome UF</th>
+            <th>Categoria Administrativa</th>
+        </tr>
+        </thead>
+    <tbody>
+    {% for result in locals %}
+        <tr>
+          <th> {{ result.codLocalIES }}</th>
+          <th> {{ result.codOriginalLocalIES  }}</th>
+          <th> {{ result.nomeRegiao }}</th>
+          <th> {{ result.nomeUF }}</th>
+          <th> {{ result.categoriaAdmistrativa }}</th>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% if locals.has_other_pages %}
+      <ul class="pagination pagination-sm flex-sm-wrap">
+        {% if locals.has_previous %}
+          <li><a href="?page={{ locals.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in locals.paginator.page_range %}
+          {% if locals.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if locals.has_next %}
+          <li><a href="?page={{ locals.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Código Origem</th>
+            <th>Nome do Curso</th>
+            <th>É na capital</th>
+            <th>Grau Acadêmico</th>
+            <th>Quantidade de Ingressos</th>
+            <th>Quantidade de Concluintes</th>
+            <th>Turno</th>
+        </tr>
+        </thead>
+    <tbody>
+    {% for result in cursos %}
+        <tr>
+          <th> {{ result.codCurso }}</th>
+          <th> {{ result.codOriginalCurso  }}</th>
+          <th> {{ result.nomeCurso }}</th>
+          <th> {{ result.capital }}</th>
+          <th> {{ result.grauAcademico }}</th>
+          <th> {{ result.quantidadeIngresso  }}</th>
+          <th> {{ result.quantidadeConcluinte }}</th>
+          <th> {{ result.turno }}</th>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+    {% if cursos.has_other_pages %}
+      <ul class="pagination pagination-sm flex-sm-wrap">
+        {% if cursos.has_previous %}
+          <li><a href="?page={{ cursos.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in cursos.paginator.page_range %}
+          {% if cursos.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+          {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+          {% endif %}
+        {% endfor %}
+        {% if cursos.has_next %}
+          <li><a href="?page={{ cursos.next_page_number }}">&raquo;</a></li>
+        {% else %}
+          <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+      </ul>
+    {% endif %}
+
+{% endblock %}
