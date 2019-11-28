@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from warehouse import models
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db.models import Q
+
 
 
 def tempo(request):
@@ -46,7 +48,7 @@ def curso(request):
 
 
 def aluna(request):
-    aluna_list = models.FatoAluno.objects.all()
+    aluna_list = models.FatoAluno.objects.all().filter(~Q(indiceDesistenciaReservaVagasRegiao=None))
     page = request.GET.get('page', 1)
 
     paginator = Paginator(aluna_list, 50)

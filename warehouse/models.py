@@ -50,8 +50,10 @@ class FatoAluno(models.Model):
     codBolsaAuxilioPk = models.ForeignKey('DimBolsaAuxilio', models.DO_NOTHING)
 
     indiceEscolaPublicaCursosTradicionais = models.IntegerField(blank=True, null=True)
-    indiceIngressantesConcluintesRegiaoFederal = models.IntegerField(blank=True, null=True)
-    indiceIngressantesConcluintesRegiaoEstadual = models.IntegerField(blank=True, null=True)
+    indiceIngressantesRegiaoFederal = models.IntegerField(blank=True, null=True)
+    indiceConcluintesRegiaoFederal = models.IntegerField(blank=True, null=True)
+    indiceIngressantesRegiaoEstadual = models.IntegerField(blank=True, null=True)
+    indiceConcluintesRegiaoEstadual = models.IntegerField(blank=True, null=True)
     indiceDesistenciaReservaVagasRegiao = models.IntegerField(blank=True, null=True)
     indiceDesistenciaDeficiencia = models.IntegerField(blank=True, null=True)
     indiceConcluintesCapitalInteriorNordeste = models.IntegerField(blank=True, null=True)
